@@ -1,4 +1,4 @@
-
+﻿
 require("dotenv").config();
 
 const { GoogleGenAI } = require("@google/genai");
@@ -15,7 +15,7 @@ async function testGemini() {
             console.log(`Gemini test: attempt ${attempt}/${maxAttempts}`);
 
             const response = await ai.models.generateContent({
-                model: "gemini-3.6-flash",
+                model: "gemini-3.5-flash-lite",
                 contents: "Reply with: Gemini is working!"
             });
 
@@ -48,3 +48,5 @@ if (!process.env.GEMINI_API_KEY) {
 } else {
     testGemini();
 }
+
+

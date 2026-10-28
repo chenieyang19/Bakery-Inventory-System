@@ -1,0 +1,70 @@
+
+async function sendMessage(event) {
+  event.preventDefault();
+
+  const text = question.trim();
+  if (!text || sending) return;
+
+  setMessages((previous) => [
+    ...previous,
+    { role: "user", text },
+  ]);
+
+  setQuestion("");
+  setSending(true);
+
+  try {
+    const response = await fetch(`${API}/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: text,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error ||
+        data.message ||
+        `AI request failed (HTTP ${response.status}).`
+      );
+    }
+
+    if (data.success === false) {
+      throw new Error(
+        data.error || data.message || "The AI request failed."
+      );
+    }
+
+    const answer = data.reply;
+
+    if (typeof answer !== "string" || !answer.trim()) {
+      console.error("Unexpected AI response:", data);
+      throw new Error("The AI returned no reply.");
+    }
+
+    setMessages((previous) => [
+      ...previous,
+      {
+        role: "assistant",
+        text: answer.trim(),
+      },
+    ]);
+  } catch (err) {
+    console.error("AI chat error:", err);
+
+    setMessages((previous) => [
+      ...previous,
+      {
+        role: "assistant",
+        text: `Sorry, I couldn't answer that. ${err.message}`,
+      },
+    ]);
+  } finally {
+    setSending(false);
+  }
+}

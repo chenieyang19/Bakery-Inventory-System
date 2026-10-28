@@ -164,6 +164,7 @@ function App() {
     }
   }
 
+
   async function sendMessage(event) {
     event.preventDefault();
 
@@ -182,23 +183,31 @@ function App() {
       const response = await fetch(`${API}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: text }),
+        body: JSON.stringify({ message: text }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Unable to get an AI response.");
+        throw new Error(
+          data.message || data.error || "Unable to get an AI response."
+        );
       }
 
       setMessages((previous) => [
         ...previous,
         {
           role: "assistant",
-          text: data.answer || data.message || "No answer was returned.",
+          text:
+            data.reply ||
+            data.answer ||
+            data.message ||
+            "No answer was returned.",
         },
       ]);
     } catch (err) {
+      console.error("AI chat error:", err);
+
       setMessages((previous) => [
         ...previous,
         {
@@ -210,6 +219,7 @@ function App() {
       setSending(false);
     }
   }
+
 
   const totalProducts =
     summary?.totalItems ?? summary?.totalProducts ?? 0;
