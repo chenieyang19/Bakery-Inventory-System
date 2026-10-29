@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const API = "http://localhost:5000/api/ai";
-const PRODUCT_API = "http://localhost:5000/api/products";
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/, "");
+const API = `${API_BASE}/api/ai`;
+const PRODUCT_API = `${API_BASE}/api/products`;
 
 const initialProduct = {
   name: "",
@@ -71,7 +72,7 @@ function App() {
       );
     } catch (err) {
       setError(
-        "Unable to connect to the backend. Make sure your server is running on port 5000."
+        "Unable to connect to the backend. Check your VITE_API_URL setting and make sure the backend is online."
       );
       console.error(err);
     } finally {
@@ -370,7 +371,7 @@ function App() {
                 style={{
                   display: "grid",
                   gap: 7,
-                  color: "#29263e",
+                  color: "#eadfce",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -387,9 +388,9 @@ function App() {
                   style={{
                     width: "100%",
                     padding: "12px",
-                    color: "#29263e",
-                    background: "#fff",
-                    border: "1px solid #d8d3e5",
+                    color: "#eadfce",
+                    background: "#211b17",
+                    border: "1px solid #59483a",
                     borderRadius: 10,
                   }}
                 />
@@ -399,7 +400,7 @@ function App() {
                 style={{
                   display: "grid",
                   gap: 7,
-                  color: "#29263e",
+                  color: "#eadfce",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -416,9 +417,9 @@ function App() {
                   style={{
                     width: "100%",
                     padding: "12px",
-                    color: "#29263e",
-                    background: "#fff",
-                    border: "1px solid #d8d3e5",
+                    color: "#eadfce",
+                    background: "#211b17",
+                    border: "1px solid #59483a",
                     borderRadius: 10,
                   }}
                 />
@@ -428,7 +429,7 @@ function App() {
                 style={{
                   display: "grid",
                   gap: 7,
-                  color: "#29263e",
+                  color: "#eadfce",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -447,9 +448,9 @@ function App() {
                   style={{
                     width: "100%",
                     padding: "12px",
-                    color: "#29263e",
-                    background: "#fff",
-                    border: "1px solid #d8d3e5",
+                    color: "#eadfce",
+                    background: "#211b17",
+                    border: "1px solid #59483a",
                     borderRadius: 10,
                   }}
                 />
@@ -459,7 +460,7 @@ function App() {
                 style={{
                   display: "grid",
                   gap: 7,
-                  color: "#29263e",
+                  color: "#eadfce",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -478,9 +479,9 @@ function App() {
                   style={{
                     width: "100%",
                     padding: "12px",
-                    color: "#29263e",
-                    background: "#fff",
-                    border: "1px solid #d8d3e5",
+                    color: "#eadfce",
+                    background: "#211b17",
+                    border: "1px solid #59483a",
                     borderRadius: 10,
                   }}
                 />
@@ -490,7 +491,7 @@ function App() {
                 style={{
                   display: "grid",
                   gap: 7,
-                  color: "#29263e",
+                  color: "#eadfce",
                   fontSize: 12,
                   fontWeight: 600,
                 }}
@@ -505,9 +506,9 @@ function App() {
                   style={{
                     width: "100%",
                     padding: "12px",
-                    color: "#29263e",
-                    background: "#fff",
-                    border: "1px solid #d8d3e5",
+                    color: "#eadfce",
+                    background: "#211b17",
+                    border: "1px solid #59483a",
                     borderRadius: 10,
                   }}
                 />
